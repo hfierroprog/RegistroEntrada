@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import javax.swing.JOptionPane;
 
 public class MENU extends javax.swing.JFrame {
     
@@ -21,7 +22,13 @@ public class MENU extends javax.swing.JFrame {
         initComponents();
         this.usuario = usuario;
         this.conec = conec;
+        this.setTitle("MENU");
     }
+
+    public MENU() {
+        
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -56,6 +63,11 @@ public class MENU extends javax.swing.JFrame {
 
         Salir.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         Salir.setText("Salir");
+        Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -87,6 +99,7 @@ public class MENU extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnENTRADAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnENTRADAActionPerformed
+        if(!conec.verificar(usuario)){
             int hora,min;
             String fechatxt,horatxt;
             Calendar calendario = new GregorianCalendar();
@@ -102,17 +115,22 @@ public class MENU extends javax.swing.JFrame {
             System.out.println(fechatxt+" - "+horatxt+" - "+usuario);
             
             conec.insertarReg(fechatxt, horatxt, usuario);
-            
-            if(convertirFecha(calendario.getTime()) == fechatxt){
-                this.setEnabled(false);
-            }else{
-                
-            }
+            JOptionPane.showMessageDialog(null, "ENTRADA AGREGADA CORRECTAMENTE!");
+        }else{
+            JOptionPane.showMessageDialog(null, "ERROR: No puedes agregar 2 entradas en 1 mismo dia!");
+        }
+        
+
     }//GEN-LAST:event_btnENTRADAActionPerformed
 
     private void btnVERENTRADAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVERENTRADAActionPerformed
-        
+        FormEntrada entrada = new FormEntrada(conec);
+        entrada.show();
     }//GEN-LAST:event_btnVERENTRADAActionPerformed
+
+    private void SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_SalirActionPerformed
 
     public String convertirFecha(Date fecha){
            Format formatter = new SimpleDateFormat("dd/MM/yyyy");	
