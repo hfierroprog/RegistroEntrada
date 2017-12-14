@@ -23,6 +23,7 @@ public class MENU extends javax.swing.JFrame {
         this.usuario = usuario;
         this.conec = conec;
         this.setTitle("MENU");
+        this.setLocationRelativeTo(null);
     }
 
     public MENU() {
@@ -42,8 +43,6 @@ public class MENU extends javax.swing.JFrame {
         btnENTRADA = new javax.swing.JButton();
         btnVERENTRADA = new javax.swing.JButton();
         Salir = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnENTRADA.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         btnENTRADA.setText("ENTRADA");
@@ -99,7 +98,7 @@ public class MENU extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnENTRADAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnENTRADAActionPerformed
-        if(!conec.verificar(usuario)){
+        if(conec.verificar(usuario)){
             int hora,min;
             String fechatxt,horatxt;
             Calendar calendario = new GregorianCalendar();
@@ -119,8 +118,6 @@ public class MENU extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(null, "ERROR: No puedes agregar 2 entradas en 1 mismo dia!");
         }
-        
-
     }//GEN-LAST:event_btnENTRADAActionPerformed
 
     private void btnVERENTRADAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVERENTRADAActionPerformed

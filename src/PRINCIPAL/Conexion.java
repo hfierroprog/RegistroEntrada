@@ -86,15 +86,25 @@ public class Conexion {
             
             ResultSet rs = st.executeQuery("SELECT MAX(FECHA) FROM ENTRADA WHERE ID_USUARIO = "+usuario);
             
-            while(rs.next()){
-                fechaDB = rs.getString(1);
-            }
-            
-            if (fechaDB == m.convertirFecha(calendario.getTime())){
-                resultado = false;
-            }else{
+            try{
+                if (rs.next() == false) {
+                    resultado = true;
+                } else {
+                    fechaDB = rs.getString(1);
+                    String fechaactual = m.convertirFecha(calendario.getTime());
+                    if (fechaDB.equals(fechaactual)) {
+                        resultado = false;
+                    } else {
+                        resultado = true;
+                    }
+                }
+            }catch(Exception ex){
                 resultado = true;
             }
+            
+
+            
+
         } catch (SQLException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         }

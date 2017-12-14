@@ -21,6 +21,7 @@ public class FormEntrada extends javax.swing.JFrame {
         initComponents();
         this.setTitle("Horario entrada personal.");
         this.conec = conec;
+        this.setLocationRelativeTo(null);
         
         ResultSet rs = conec.obtenerREG();
         tblEntrada.setModel(DbUtils.resultSetToTableModel(rs));
