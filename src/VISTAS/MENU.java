@@ -96,7 +96,7 @@ public class MENU extends javax.swing.JFrame {
             fechatxt = convertirFecha(fecha);
             horatxt = hora+":"+min;
             
-            System.out.println(fechatxt+" - "+horatxt);
+            System.out.println(fechatxt+" - "+horatxt+" - "+usuario);
             
             
     }//GEN-LAST:event_btnENTRADAActionPerformed
