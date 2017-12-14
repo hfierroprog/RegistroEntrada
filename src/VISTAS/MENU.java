@@ -5,6 +5,7 @@
  */
 package VISTAS;
 
+import PRINCIPAL.Conexion;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -14,10 +15,12 @@ import java.util.GregorianCalendar;
 public class MENU extends javax.swing.JFrame {
     
     private int usuario;
+    private Conexion conec;
     
-    public MENU(int usuario) {
+    public MENU(int usuario,Conexion conec) {
         initComponents();
         this.usuario = usuario;
+        this.conec = conec;
     }
 
     /**
@@ -98,7 +101,13 @@ public class MENU extends javax.swing.JFrame {
             
             System.out.println(fechatxt+" - "+horatxt+" - "+usuario);
             
+            conec.insertarReg(fechatxt, horatxt, usuario);
             
+            if(convertirFecha(calendario.getTime()) == fechatxt){
+                this.setEnabled(false);
+            }else{
+                
+            }
     }//GEN-LAST:event_btnENTRADAActionPerformed
 
     private void btnVERENTRADAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVERENTRADAActionPerformed
@@ -106,7 +115,7 @@ public class MENU extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVERENTRADAActionPerformed
 
     public String convertirFecha(Date fecha){
-           Format formatter = new SimpleDateFormat("dd-MM-yyyy");	
+           Format formatter = new SimpleDateFormat("dd/MM/yyyy");	
            return formatter.format(fecha);
     }
     

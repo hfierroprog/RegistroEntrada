@@ -8,9 +8,9 @@ import javax.swing.JOptionPane;
 
 public class LOGIN extends javax.swing.JFrame {
     private Connection con = null;
+    private Conexion conec = new Conexion();
     
     public LOGIN() {
-        Conexion conec = new Conexion();
         con = conec.Conectar();
         initComponents();
     }
@@ -104,7 +104,7 @@ public class LOGIN extends javax.swing.JFrame {
             try{
                 ResultSet rs = st.executeQuery("SELECT * FROM USUARIO WHERE N_USUARIO = '"+txtUSUARIO.getText()+"' AND CONTRA = '"+txtCONTRA.getText()+"'");
                 if(rs.next()){
-                    MENU m = new MENU(Integer.parseInt(rs.getString("ID")));
+                    MENU m = new MENU(Integer.parseInt(rs.getString("ID")),conec);
                     m.show();
                 }else{
                     JOptionPane.showMessageDialog(null, "ERROR!");

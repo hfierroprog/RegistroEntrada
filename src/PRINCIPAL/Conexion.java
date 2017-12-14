@@ -1,7 +1,9 @@
 package PRINCIPAL;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
@@ -42,9 +44,13 @@ public class Conexion {
     
     public void insertarReg(String fecha,String hora,int usuario){
         try {
-            Statement statement = con.createStatement();
+            PreparedStatement stmt = con.prepareStatement("INSERT INTO ENTRADA(ID_USUARIO,FECHA,HORA) VALUES(?,?,?)");
+            stmt.setInt(1, usuario);
+            stmt.setString(2, fecha);
+            stmt.setString(3, hora);
             
-            statement.executeUpdate("INSERT INTO ENTRADA()");
+            stmt.executeUpdate();
+            
         } catch (SQLException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         }
